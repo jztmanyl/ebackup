@@ -80,7 +80,7 @@ public class eBackup extends JavaPlugin implements CommandExecutor {
         ftpPass = getConfig().getString("ftp.pass");
         ftpPath = getConfig().getString("ftp.path");
         fileEnable = getConfig().getBoolean("file.enable");
-        filePath =  = getConfig().getString("file.path");
+        filePath = getConfig().getString("file.path");
         backupPluginJars = getConfig().getBoolean("backup.pluginjars");
         backupPluginConfs = getConfig().getBoolean("backup.pluginconfs");
         filesToIgnore = getConfig().getStringList("backup.ignore");

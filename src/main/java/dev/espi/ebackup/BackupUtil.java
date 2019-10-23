@@ -58,8 +58,7 @@ public class BackupUtil {
 
     // upload single file
     // run async plz
-    public static void doFileUpload()
-    {
+    public static void doFileUpload() {
       eBackup.getPlugin().getLogger().info("Starting file upload...");
       try {
         // check if file exists before uploading
