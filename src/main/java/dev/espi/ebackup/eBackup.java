@@ -43,6 +43,9 @@ public class eBackup extends JavaPlugin implements CommandExecutor {
     int ftpPort;
     boolean ftpEnable;
 
+    String filePath;
+    boolean fileEnable;
+
     boolean backupPluginJars, backupPluginConfs;
     List<String> filesToIgnore;
     List<File> ignoredFiles = new ArrayList<>();
@@ -76,6 +79,8 @@ public class eBackup extends JavaPlugin implements CommandExecutor {
         ftpUser = getConfig().getString("ftp.user");
         ftpPass = getConfig().getString("ftp.pass");
         ftpPath = getConfig().getString("ftp.path");
+        fileEnable = getConfig().getBoolean("file.enable");
+        filePath =  = getConfig().getString("file.path");
         backupPluginJars = getConfig().getBoolean("backup.pluginjars");
         backupPluginConfs = getConfig().getBoolean("backup.pluginconfs");
         filesToIgnore = getConfig().getStringList("backup.ignore");
@@ -114,6 +119,7 @@ public class eBackup extends JavaPlugin implements CommandExecutor {
                 sender.sendMessage(ChatColor.GRAY + "" + ChatColor.STRIKETHROUGH + "=====" + ChatColor.RESET + ChatColor.DARK_AQUA + " eBackup v" + getPlugin().getDescription().getVersion() + " Help " + ChatColor.RESET + ChatColor.GRAY + ChatColor.STRIKETHROUGH + "=====");
                 sender.sendMessage(ChatColor.AQUA + "> " + ChatColor.GRAY + "/ebackup backup - Starts a backup of the server.");
                 sender.sendMessage(ChatColor.AQUA + "> " + ChatColor.GRAY + "/ebackup backuplocal - Starts a backup of the server, but does not upload to FTP/SFTP.");
+                sender.sendMessage(ChatColor.AQUA + "> " + ChatColor.GRAY + "/ebackup uploadfile - Starts a upload of the file.");
                 sender.sendMessage(ChatColor.AQUA + "> " + ChatColor.GRAY + "/ebackup list - Lists the backups in the folder.");
                 sender.sendMessage(ChatColor.AQUA + "> " + ChatColor.GRAY + "/ebackup stats - Shows disk space.");
                 break;
@@ -128,6 +134,13 @@ public class eBackup extends JavaPlugin implements CommandExecutor {
                 sender.sendMessage("Starting backup...");
                 Bukkit.getScheduler().runTaskAsynchronously(getPlugin(), () -> {
                     BackupUtil.doBackup(false);
+                    sender.sendMessage("Finished!");
+                });
+                break;
+            case "uploadfile":
+                sender.sendMessage("Starting file upload...");
+                Bukkit.getScheduler().runTaskAsynchronously(getPlugin(), () -> {
+                    BackupUtil.doFileUpload();
                     sender.sendMessage("Finished!");
                 });
                 break;

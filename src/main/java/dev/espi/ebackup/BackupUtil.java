@@ -56,6 +56,40 @@ public class BackupUtil {
         }
     }
 
+    // upload single file
+    // run async plz
+    public static void doFileUpload()
+    {
+      eBackup.getPlugin().getLogger().info("Starting file upload...");
+      try {
+        // check if file exists before uploading
+        if (!eBackup.getPlugin().filePath.exists())
+        {
+          eBackup.getPlugin().getLogger().info("File not found...");
+          continue;
+        }
+        // upload to ftp/sftp
+        if (uploadToServer && eBackup.getPlugin().ftpEnable) {
+
+            if (eBackup.getPlugin().ftpType.equals("sftp")) {
+                eBackup.getPlugin().getLogger().info("Uploading file to SFTP server...");
+                uploadSFTP(new File(eBackup.getPlugin().filePath));
+            } else if (uploadToServer && eBackup.getPlugin().ftpType.equals("ftp")) {
+                eBackup.getPlugin().getLogger().info("Uploading backup to FTP server...");
+                uploadFTP(new File(eBackup.getPlugin().filePath));
+            }
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        for (World w : Bukkit.getWorlds()) {
+            w.setAutoSave(true);
+        }
+    }
+      eBackup.getPlugin().getLogger().info("File upload complete!");
+    }
+
     // actually do the backup
     // run async plz
     public static void doBackup(boolean uploadToServer) {

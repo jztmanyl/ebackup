@@ -20,6 +20,11 @@ backup-format: 'eBackup {DATE}'
 # The folder where to store the backups locally.
 backup-path: 'plugins/eBackup/backups'
 
+# Individual file upload.
+file:
+  enable: true
+  path: 'plugins/eBackup/config.yml'
+
 # The maximum backups stored. Will delete older backups when reached. (≤ 0 to disable)
 # Note: this will only work with local backups (fallbacks included).
 max-backups: 20
