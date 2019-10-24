@@ -62,18 +62,18 @@ public class BackupUtil {
       eBackup.getPlugin().getLogger().info("Starting file upload...");
       try {
         // check if file exists before uploading
-        if (!eBackup.getPlugin().filePath.exists())
+        if (!new File(eBackup.getPlugin().filePath).exists())
         {
           eBackup.getPlugin().getLogger().info("File not found...");
-          continue;
+          return;
         }
         // upload to ftp/sftp
-        if (uploadToServer && eBackup.getPlugin().ftpEnable) {
+        if (eBackup.getPlugin().ftpEnable) {
 
             if (eBackup.getPlugin().ftpType.equals("sftp")) {
                 eBackup.getPlugin().getLogger().info("Uploading file to SFTP server...");
                 uploadSFTP(new File(eBackup.getPlugin().filePath));
-            } else if (uploadToServer && eBackup.getPlugin().ftpType.equals("ftp")) {
+            } else if (eBackup.getPlugin().ftpType.equals("ftp")) {
                 eBackup.getPlugin().getLogger().info("Uploading backup to FTP server...");
                 uploadFTP(new File(eBackup.getPlugin().filePath));
             }
