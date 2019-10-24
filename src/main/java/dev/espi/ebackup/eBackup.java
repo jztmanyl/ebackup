@@ -96,7 +96,6 @@ public class eBackup extends JavaPlugin implements CommandExecutor {
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
             if (Cron.run()) {
                 BackupUtil.doFileUpload();
-                BackupUtil.doBackup(true);
             }
         }, 20, 20);
 
